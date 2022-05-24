@@ -1,0 +1,27 @@
+.card
+  .card-body
+    h4
+      | Список позиций меню
+      p id="notice" = notice
+    table.table-hover
+      thead.thead-dark
+        tr
+          th ID
+          th Название
+          th Статус
+          th Родитель
+          th Действие
+      tbody
+        - positions.each do |position|
+          tr style="background-color:#{position_color(position)}"
+            td = position.id
+            td = position.name
+            td = I18n.t("kinds.#{position.kind}")
+            td = position.parent&.name
+            td
+              = button_to 'Активировать', move_to_next_status_admin_position_path(position.id, kind: :active), method: :post, class: 'btn btn-success'
+              = button_to 'Новый', move_to_next_status_admin_position_path(position.id, kind: :new), method: :post
+              = button_to 'Блокировать', move_to_next_status_admin_position_path(position.id, kind: :blocked), method: :post
+
+    .row
+      = paginate positions, :theme => 'twitter-bootstrap-3'
