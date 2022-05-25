@@ -1,27 +1,45 @@
-.card
-  .card-body
+.container
+  .row
     h4
       | Список позиций меню
       p id="notice" = notice
-    table.table-hover
-      thead.thead-dark
-        tr
-          th ID
-          th Название
-          th Статус
-          th Родитель
-          th Действие
-      tbody
-        - positions.each do |position|
-          tr style="background-color:#{position_color(position)}"
-            td = position.id
-            td = position.name
-            td = I18n.t("kinds.#{position.kind}")
-            td = position.parent&.name
-            td
-              = button_to 'Активировать', move_to_next_status_admin_position_path(position.id, kind: :active), method: :post, class: 'btn btn-success'
-              = button_to 'Новый', move_to_next_status_admin_position_path(position.id, kind: :new), method: :post
-              = button_to 'Блокировать', move_to_next_status_admin_position_path(position.id, kind: :blocked), method: :post
+  .container
+    = simple_form_for :filter, url: admin_positions_path, method: :get, class: 'm-b-none' do |f|
+      .row.justify-content-md-end
+        .col-md-auto
+          = f.input :parent_name, label: false, placeholder: "Имя Родителя", input_html: { class: 'form-control' }
+        .col-md-auto
+          = f.input :name, label: false, placeholder: "Имя", input_html: { class: 'form-control' }
+        .col-md-auto
+          = f.input :kind, label: false, required: false, collection: Position::KINDS.map{|k, v| [I18n.t("kinds.#{k}"), v]}, include_blank: "Статус", input_html: { class: 'form-control' }
+        .col-md-auto
+          = f.button :submit, "Поиск", class: 'btn btn-secondary'
+  .row.justify-content-md-end
+  .container
+    .row
+      table.table-bordered.table-striped
+        thead
+          tr
+            th ID
+            th Название
+            th Статус
+            th Родитель
+            th Действие
+        tbody
+          - positions.each do |position|
+            tr style="background-color:#{position_color(position)}"
+              td = position.id
+              td = position.name
+              td = I18n.t("kinds.#{position.kind}")
+              td = position.parent&.name
+              td
+                .container.row.justify-content-md-end
+                  .col-md-auto
+                    = button_to 'Активировать', move_to_next_status_admin_position_path(position.id, kind: :active), method: :post, class: 'btn-sm btn-success'
+                  .col-md-auto
+                    = button_to 'Новый', move_to_next_status_admin_position_path(position.id, kind: :new), method: :post, class: 'btn-sm btn-light'
+                  .col-md-auto
+                    = button_to 'Блокировать', move_to_next_status_admin_position_path(position.id, kind: :blocked), method: :post, class: 'btn-sm btn-danger'
 
     .row
-      = paginate positions, :theme => 'twitter-bootstrap-3'
+      = paginate positions, :theme => 'twitter-bootstrap-4'

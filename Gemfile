@@ -19,7 +19,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'slim'
 gem 'kaminari'
-gem 'bootstrap-kaminari-views'
+gem 'bootstrap4-kaminari-views'
+gem 'simple_form'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

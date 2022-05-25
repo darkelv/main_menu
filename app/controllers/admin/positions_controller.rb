@@ -18,6 +18,6 @@ class Admin::PositionsController < ApplicationController
   end
 
   def filter_params
-
+    params[:filter]&.permit(:parent_name, :name, :kind).to_h.symbolize_keys
   end
 end
