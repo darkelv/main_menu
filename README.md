@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Меню.
+Состоит из трех частей:
+1) Административная часть /admin/positions поддерживает поиск по имени, имени родителя и статусу, позволяет переводить пункты меню по статусам
+2) Апи /v1/api/menu/by_status поддеривает обращения как с  параметром так и без, ожидаемые параметры kind, должен содержать одно из перечисленных значений(new, active, blocked)
+3) Дерево представления /v1/menu выводить список всех позиций независимо от статуса
