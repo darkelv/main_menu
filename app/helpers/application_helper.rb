@@ -1,7 +1,7 @@
 module ApplicationHelper
   def position_color(position)
     case position.kind
-      when 'new'
+      when 'draft'
         '#FFFF00'
       when 'active'
         '#198754'

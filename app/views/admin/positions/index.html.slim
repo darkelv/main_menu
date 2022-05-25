@@ -3,17 +3,16 @@
     h4
       | Список позиций меню
       p id="notice" = notice
-  .container
-    = simple_form_for :filter, url: admin_positions_path, method: :get, class: 'm-b-none' do |f|
-      .row.justify-content-md-end
-        .col-md-auto
-          = f.input :parent_name, label: false, placeholder: "Имя Родителя", input_html: { class: 'form-control' }
-        .col-md-auto
-          = f.input :name, label: false, placeholder: "Имя", input_html: { class: 'form-control' }
-        .col-md-auto
-          = f.input :kind, label: false, required: false, collection: Position::KINDS.map{|k, v| [I18n.t("kinds.#{k}"), v]}, include_blank: "Статус", input_html: { class: 'form-control' }
-        .col-md-auto
-          = f.button :submit, "Поиск", class: 'btn btn-secondary'
+  = search_form_for q, url: admin_positions_path, method: :get, class: 'form-control' do |f|
+    .row.justify-content-md-end
+      .col-md-auto
+        = f.search_field :parent_name_eq, value: f.object&.parent_name_eq, label: false, placeholder: "Имя Родителя", class: "form-control"
+      .col-md-auto
+        = f.search_field :name_eq, value: f.object&.name_eq, label: false, placeholder: "Имя", class: "form-control"
+      .col-md-auto
+        = f.collection_select :kind_eq, Position::KINDS, :last, :first, { include_blank: "All" },  { class: "form-select" }
+      .col-md-auto
+        = f.submit
   .row.justify-content-md-end
   .container
     .row

@@ -4,6 +4,6 @@ class V1::Api::MenuController < ActionController::API
     menu_top = Position.where(parent_id: nil)
     menu = MenuBuilder.new.perform(menu_top, params[:kind])
 
-    render({json: {result:  menu.as_json}})
+    render({ json: { result:  menu.as_json }})
   end
 end
