@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+parent_name = ["Кухня", "Гостинная", "Спальня", "Коридор", "Ванная комната"]
+position_parent = parent_name.map{ |name| Position.create!(name: name, kind: Position::KINDS.keys.sample) }
+children_name = ["Столы", "Стулья", "Кровати", "Зановески", "Душевая Кабина"]
+children = position_parent.map{ |parent|  children_name.map { |name| Position.create!(name: name, parent: parent, kind: Position::KINDS.keys.sample) }}
+children_menu_name = ["Цвета", "Материалы"]
+children_menu = children.flatten.map{|parent| children_menu_name.map { |name|  Position.create!(name: name, parent: parent, kind: Position::KINDS.keys.sample) }}
+color_menu_name = ["Красный", "Синий", "Зеленый"]
+Position.where(name: "Цвета").find_each{ |parent| color_menu_name.map { |name| Position.create!(name: name, parent: parent,kind: Position::KINDS.keys.sample) }}

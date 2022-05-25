@@ -2,7 +2,7 @@ module ApplicationHelper
   def position_color(position)
     case position.kind
       when 'new'
-        '#FFFFFF'
+        '#FFFF00'
       when 'active'
         '#198754'
       when 'blocked'
