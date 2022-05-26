@@ -36,7 +36,7 @@
                   .col-md-auto
                     = button_to 'Активировать', move_to_next_status_admin_position_path(position.id, kind: :active), method: :post, class: 'btn-sm btn-success'
                   .col-md-auto
-                    = button_to 'Новый', move_to_next_status_admin_position_path(position.id, kind: :new), method: :post, class: 'btn-sm btn-light'
+                    = button_to 'Новый', move_to_next_status_admin_position_path(position.id, kind: :draft), method: :post, class: 'btn-sm btn-light'
                   .col-md-auto
                     = button_to 'Блокировать', move_to_next_status_admin_position_path(position.id, kind: :blocked), method: :post, class: 'btn-sm btn-danger'
 
