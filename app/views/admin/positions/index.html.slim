@@ -10,7 +10,7 @@
       .col-md-auto
         = f.search_field :name_eq, value: f.object&.name_eq, label: false, placeholder: "Имя", class: "form-control"
       .col-md-auto
-        = f.collection_select :kind_eq, Position::KINDS, :last, :first, { include_blank: "All" },  { class: "form-select" }
+        = f.collection_select :kind_eq, Position.aasm.events.map(&:name), :to_s, :to_s, { include_blank: "All" },  { class: "form-select" }
       .col-md-auto
         = f.submit
   .row.justify-content-md-end
